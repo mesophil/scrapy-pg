@@ -1,4 +1,4 @@
-# Scrapy settings for chocolate_scraper project
+# Scrapy settings for uni_scraper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "chocolate_scraper"
+BOT_NAME = "uni_scraper"
 
-SPIDER_MODULES = ["chocolate_scraper.spiders"]
-NEWSPIDER_MODULE = "chocolate_scraper.spiders"
+SPIDER_MODULES = ["uni_scraper.spiders"]
+NEWSPIDER_MODULE = "uni_scraper.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "chocolate_scraper (+http://www.yourdomain.com)"
+#USER_AGENT = "uni_scraper (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,16 +45,19 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "chocolate_scraper.middlewares.ChocolateScraperSpiderMiddleware": 543,
+#    "uni_scraper.middlewares.UniScraperSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-
-# use multiple user agents to avoid getting banned
 DOWNLOADER_MIDDLEWARES = {
    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+}
+
+DOWNLOAD_HANDLERS = {
+   "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+   "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
 }
 
 # Enable or disable extensions
@@ -65,10 +68,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   "chocolate_scraper.pipelines.PriceToUSDPipeline": 100,
-   "chocolate_scraper.pipelines.DuplicatesPipeline": 200,
-}
+#ITEM_PIPELINES = {
+#    "uni_scraper.pipelines.UniScraperPipeline": 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

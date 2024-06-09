@@ -39,6 +39,7 @@ queuelib==1.6.2
 requests==2.31.0
 requests-file==2.0.0
 Scrapy==2.11.1
+scrapy-user-agents==0.1.1
 service-identity==24.1.0
 six==1.16.0
 stack-data==0.6.3
@@ -46,7 +47,9 @@ tldextract==5.1.2
 traitlets==5.14.3
 Twisted==24.3.0
 typing_extensions==4.11.0
+ua-parser==0.18.0
 urllib3==2.2.1
+user-agents==2.2.0
 w3lib==2.1.2
 wcwidth==0.2.13
 zope.interface==6.3
