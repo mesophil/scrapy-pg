@@ -1,14 +1,13 @@
 import scrapy
 from uni_scraper.items import UniItem
+from uni_scraper.generate_urls import urls
 
 class UniSpiderSpider(scrapy.Spider):
     name = "uni_spider"
 
     def start_requests(self):
-        url = "https://www.uniqlo.com/ca/en/men/tops/tops-collections"
-        yield scrapy.Request(url, meta={"playwright": True,
-                                        }
-                                        )
+        for url in urls:
+            yield scrapy.Request(url, meta={"playwright": True})
 
     def parse(self, response):
         product_item = UniItem()
