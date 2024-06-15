@@ -69,8 +69,9 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "uni_scraper.pipelines.CleanDescriptionPipeline": 100,
-   "uni_scraper.pipelines.RoundNumbersPipeline": 200,
+   "uni_scraper.pipelines.DuplicatesPipeline": 100,
+   "uni_scraper.pipelines.CleanDescriptionPipeline": 200,
+   "uni_scraper.pipelines.RoundNumbersPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

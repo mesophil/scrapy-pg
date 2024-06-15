@@ -9,8 +9,8 @@ def read_urls(file_name='uni_scraper/urls.txt'):
     with open(file_name, 'r') as file:
         for url in file:
             urls.append("".join([base_url, url.rstrip(), num_items]))
+            # add break if testing
             
-            break # REMOVE THIS -- THIS IS ONLY SO IT DOESNT SCRAPE THE WHOLE WEBSITE WHILE TESTING
     return urls
 
 

@@ -6,6 +6,7 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from scrapy.exceptions import DropItem
 
 
 class CleanDescriptionPipeline:
@@ -30,3 +31,20 @@ class RoundNumbersPipeline:
             adapter['rating'] = round(float(adapter['rating']), 1)
 
         return item
+    
+class DuplicatesPipeline:
+
+    def __init__(self):
+        self.names_seen = set()
+
+    def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+
+        # may need to amend this later to be more discriminatory
+        # product id avoids only the exact same item
+        # if the product is listed in two colours, this may not trigger the duplicates filter
+        if adapter['product_id'] in self.names_seen:
+            raise DropItem(f"Duplicate item found: {item!r}")
+        else:
+            self.names_seen.add(adapter['product_id'])
+            return item
