@@ -2,9 +2,12 @@ import scrapy
 from uni_scraper.items import UniItem
 from uni_scraper.generate_urls import urls
 from scrapy_playwright.page import PageMethod
+import logging
 
-class UniSpiderSpider(scrapy.Spider):
-    name = "uni_spider"
+logging.basicConfig(filename='my.log', encoding='utf-8', level=logging.DEBUG)
+
+class UniSpiderPlaywright(scrapy.Spider):
+    name = "uni_spider_playwright"
 
     def start_requests(self):
         for url in urls:
@@ -16,19 +19,28 @@ class UniSpiderSpider(scrapy.Spider):
 
     async def parse(self, response):
         page = response.meta["playwright_page"]
-        page.set_default_timeout(1000)
+        page.set_default_timeout(5000)
+        await page.wait_for_selector('.description.fr-no-uppercase')
+
+        # with open('page1.html', 'wb') as html_file:
+        #     html_file.write(response.body)
 
         try:
-            # maybe use class fr-load-more
-            # but then how to target the <a>? the div is inside the link rather than containing it
-            # problem right now is that w12 might be used elsewhere lol
-            while button := page.locator("//div[contains(@class,'w12')]/a"):
-                await button.scroll_into_view_if_needed()
+            while button := page.locator("div.w12>a"):
+                logging.info("LOCATED BUTTON")
                 await button.click()
+                await page.wait_for_selector('.description.fr-no-uppercase')
+                await page.wait_for_load_state()
         except:
+            logging.info("COULD NOT LOCATE BUTTON")
             pass
 
-        # await page.close()
+        with open('page2.html', 'wb') as html_file:
+            html_file.write(response.body)
+
+        await page.close()
+
+        logging.info("Page done")
 
         product_item = UniItem()
         for product in response.css("div.fr-product-card.default"):

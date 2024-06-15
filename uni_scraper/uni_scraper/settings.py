@@ -55,10 +55,10 @@ DOWNLOADER_MIDDLEWARES = {
    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
 }
 
-DOWNLOAD_HANDLERS = {
-   "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
-   "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
-}
+# DOWNLOAD_HANDLERS = {
+#    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+#    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+# }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -95,5 +95,5 @@ DOWNLOAD_HANDLERS = {
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+# TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"

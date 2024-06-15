@@ -8,5 +8,10 @@ import scrapy
 
 class UniItem(scrapy.Item):
     name = scrapy.Field()
+    product_id = scrapy.Field()
+    gender = scrapy.Field()
+    desc = scrapy.Field()
     price = scrapy.Field()
-    image = scrapy.Field()
+    rating = scrapy.Field()
+    size_chart = scrapy.Field()
+    washing_info = scrapy.Field()
