@@ -25,6 +25,8 @@ class UniSpiderJson(scrapy.Spider):
             product_item['gender'] = item['genderName']
             product_item['desc'] = item['longDescription']
 
+            product_item['composition'] = item['composition']
+
             if item['prices']['promo']:
                 product_item['price'] = " ".join([item['prices']['promo']['value'], item['prices']['promo']['currency']['code']])
             elif item['prices']['base']:
