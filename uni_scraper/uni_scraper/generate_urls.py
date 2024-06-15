@@ -4,7 +4,7 @@ def read_urls(file_name='uni_scraper/urls.txt'):
     urls = []
 
     base_url = 'https://www.uniqlo.com/ca/api/commerce/v3/en/products?path=%2C%2C'
-    num_items = '&limit=500'
+    num_items = '&limit=350'
 
     with open(file_name, 'r') as file:
         for url in file:

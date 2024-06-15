@@ -31,6 +31,8 @@ class UniSpiderJson(scrapy.Spider):
             product_item['gender'] = item['genderName']
             product_item['desc'] = item['longDescription']
 
+            product_item['img'] = item['images']['main'][0]['url']
+
             product_item['composition'] = item['composition']
 
             if item['prices']['promo']:
@@ -41,7 +43,12 @@ class UniSpiderJson(scrapy.Spider):
                 product_item['price'] = None
 
             product_item['rating'] = item['rating']['average'] if item['rating'] else None
-            product_item['size_chart'] = item['sizeChartUrl']
+
+            if item['sizeInformation']:
+                product_item['size_chart'] = item['sizeInformation']
+            else:
+                product_item['size_chart'] = item['sizeChartUrl']
+
             product_item['washing_info'] = item['washingInformation']
 
             yield product_item
