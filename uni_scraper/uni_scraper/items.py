@@ -8,6 +8,7 @@ import scrapy
 
 class UniItem(scrapy.Item):
     name = scrapy.Field()
+    category = scrapy.Field()
     product_id = scrapy.Field()
     gender = scrapy.Field()
     desc = scrapy.Field()

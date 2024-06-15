@@ -8,6 +8,25 @@
 from itemadapter import ItemAdapter
 
 
-class UniScraperPipeline:
+class CleanDescriptionPipeline:
     def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+
+        if adapter.get('desc'):
+            adapter['desc'] = adapter['desc'].replace("<br>", " ")
+            adapter['desc'] = adapter['desc'].replace(" - ", " ")
+            adapter['desc'] = adapter['desc'].replace("- ", " ")
+        
+        return item
+
+class RoundNumbersPipeline:
+    def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+
+        if adapter.get('price'):
+            adapter['price'] = " ".join([str(round(float(adapter['price']), 2)), 'CAD']) # assume it's cad
+
+        if adapter.get('rating'):
+            adapter['rating'] = round(float(adapter['rating']), 1)
+
         return item

@@ -19,6 +19,12 @@ class UniSpiderJson(scrapy.Spider):
         if not data["result"]:
             yield 'null'
 
+        categories = []
+        for category in data["result"]["aggregations"]["tree"]["classes"]:
+            categories.append(category["name"])
+
+        product_item['category'] = categories
+
         for item in data["result"]["items"]:
             product_item['name'] = item['name']
             product_item['product_id'] = item['productId']
@@ -28,13 +34,13 @@ class UniSpiderJson(scrapy.Spider):
             product_item['composition'] = item['composition']
 
             if item['prices']['promo']:
-                product_item['price'] = " ".join([item['prices']['promo']['value'], item['prices']['promo']['currency']['code']])
+                product_item['price'] = item['prices']['promo']['value']
             elif item['prices']['base']:
-                product_item['price'] = " ".join([item['prices']['base']['value'], item['prices']['base']['currency']['code']])
+                product_item['price'] = item['prices']['base']['value']
             else:
-                product_item['price'] = 'Null'
+                product_item['price'] = None
 
-            product_item['rating'] = item['rating']['average'] if item['rating'] else 'Null'
+            product_item['rating'] = item['rating']['average'] if item['rating'] else None
             product_item['size_chart'] = item['sizeChartUrl']
             product_item['washing_info'] = item['washingInformation']
 
