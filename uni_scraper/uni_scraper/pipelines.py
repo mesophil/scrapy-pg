@@ -28,7 +28,7 @@ class RoundNumbersPipeline:
         adapter = ItemAdapter(item)
 
         if adapter.get('price'):
-            adapter['price'] = " ".join([str(round(float(adapter['price']), 2)), 'CAD']) # assume it's cad
+            adapter['price'] = str(round(float(adapter['price']), 2)) # assume it's cad
 
         if adapter.get('rating'):
             adapter['rating'] = round(float(adapter['rating']), 1)
