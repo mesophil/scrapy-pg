@@ -11,6 +11,7 @@ decorator==5.1.1
 exceptiongroup==1.2.1
 executing==2.0.1
 filelock==3.14.0
+greenlet==3.0.3
 hyperlink==21.0.0
 idna==3.7
 incremental==22.10.0
@@ -21,10 +22,13 @@ jedi==0.19.1
 jmespath==1.0.1
 lxml==5.2.1
 matplotlib-inline==0.1.7
+numpy==1.26.4
 packaging==24.0
+pandas==2.2.2
 parsel==1.9.1
 parso==0.8.4
 pexpect==4.9.0
+playwright==1.44.0
 prompt-toolkit==3.0.43
 Protego==0.3.1
 ptyprocess==0.7.0
@@ -33,12 +37,16 @@ pyasn1==0.6.0
 pyasn1_modules==0.4.0
 pycparser==2.22
 PyDispatcher==2.0.7
+pyee==11.1.0
 Pygments==2.17.2
 pyOpenSSL==24.1.0
+python-dateutil==2.9.0.post0
+pytz==2024.1
 queuelib==1.6.2
 requests==2.31.0
 requests-file==2.0.0
 Scrapy==2.11.1
+scrapy-playwright==0.0.35
 scrapy-user-agents==0.1.1
 service-identity==24.1.0
 six==1.16.0
@@ -47,6 +55,7 @@ tldextract==5.1.2
 traitlets==5.14.3
 Twisted==24.3.0
 typing_extensions==4.11.0
+tzdata==2024.1
 ua-parser==0.18.0
 urllib3==2.2.1
 user-agents==2.2.0

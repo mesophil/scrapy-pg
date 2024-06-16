@@ -19,6 +19,20 @@ After activating the virtual enrionment, navigate to `/uni_scraper/`, and run:
 
 to scrape all the data from UNIQLO's website. The result is stored in `uniqlo_all_items.csv`.
 
+The data includes:
+1.	Category
+2.	Composition
+3.	Description (cleaned)
+4.	Gender
+5.	Name
+6.	Price (in CAD)
+7.	Product ID
+8.	Rating (average)
+9.	Size chart (specific to the item)
+10.	Washing info 
+
+To efficiently find the item of interest, search the product ID in Google.
+
 14/06/2024
 889 items scraped
 327 duplicates across men/women
