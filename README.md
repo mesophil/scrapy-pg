@@ -35,7 +35,7 @@ Filter these results through:
 
 `python3 filter_data.py [options]`
 
-type `python3 filter_data.py --help` for more information. The results are shown in `filtered_items.csv`.
+type `python3 filter_data.py --help` for more information. The results are shown in an appropriately named `.csv` in the same directory.
 
 To efficiently find the item of interest, search the product ID in Google.
 

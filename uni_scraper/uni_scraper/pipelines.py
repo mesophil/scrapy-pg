@@ -7,6 +7,7 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
+import re
 
 
 class CleanDescriptionPipeline:
@@ -17,6 +18,8 @@ class CleanDescriptionPipeline:
             adapter['desc'] = adapter['desc'].replace("<br>", " ")
             adapter['desc'] = adapter['desc'].replace(" - ", " ")
             adapter['desc'] = adapter['desc'].replace("- ", " ")
+
+            adapter['desc'] = re.sub(r'\s+', ' ', adapter['desc'])
         
         return item
 
