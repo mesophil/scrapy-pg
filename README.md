@@ -13,7 +13,7 @@
 
 A web scraper designed to shop at uniqlo.
 
-After activating the virtual enrionment, navigate to `/uni_scraper/`, and run:
+After activating the virtual environment, navigate to `/uni_scraper/`, and run:
 
 `bash scrape.sh`
 
@@ -30,6 +30,12 @@ The data includes:
 8.	Rating (average)
 9.	Size chart (specific to the item)
 10.	Washing info 
+
+Filter these results through:
+
+`python3 filter_data.py [options]`
+
+type `python3 filter_data.py --help` for more information. The results are shown in `filtered_items.csv`.
 
 To efficiently find the item of interest, search the product ID in Google.
 
