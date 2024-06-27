@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <title>Uni-Scraper</title>
     <meta name="author" content="Nico Schiavone">
-    <meta content="Uniqlo items displayed as an HTML table">
+    <meta content="Scraped items displayed as an HTML table">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <main class="row">
             <div class="col">
-                <h1> UNIQLO Scraper</h1>
+                <h1>Scraping Display</h1>
 
                 <div id="table-container"></div>
             </div>
@@ -23,7 +23,7 @@
         <footer class="row">
             <div class="col">
                 <hr>
-                <p class="text-right"><a href="https://github.com/mesophil/scrapy-pg">Uni-Scraper</a> with CSV display adapted from <a href="https://github.com/derekeder/csv-to-html-table">Derek Eder</a>
+                <p class="text-right"><a href="https://github.com/mesophil/scrapy-pg">Scrapy-PG</a> with CSV display adapted from <a href="https://github.com/derekeder/csv-to-html-table">Derek Eder</a>
                 </p>
             </div>
         </footer>
@@ -43,6 +43,12 @@
             else return "";
         }
 
+        function show_image(link) {
+            if (link)
+                return "<img src='" + link + "' alt='Image displaying an item of clothing' width='150'>"
+            else return "";
+        }
+
         CsvToHtmlTable.init({
             csv_path: "data/uniqlo_all_items.csv",
             element: "table-container",
@@ -55,8 +61,8 @@
                 paging: false
             },
             custom_formatting: [
-                [5, format_link],
-                [10, format_link]
+                [4, show_image], // 0 indexed, column 4 is images
+                [9, format_link] // column 9 is the link to the size chart (.html)
             ]
         });
     </script>
