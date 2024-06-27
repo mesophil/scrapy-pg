@@ -14,12 +14,14 @@ class CleanDescriptionPipeline:
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)
 
-        if adapter.get('desc'):
-            adapter['desc'] = adapter['desc'].replace("<br>", " ")
-            adapter['desc'] = adapter['desc'].replace(" - ", " ")
-            adapter['desc'] = adapter['desc'].replace("- ", " ")
+        for s in ['desc', 'washing_info', 'composition']:
 
-            adapter['desc'] = re.sub(r'\s+', ' ', adapter['desc'])
+            if adapter.get(s):
+                adapter[s] = adapter[s].replace("<br>", " ")
+                adapter[s] = adapter[s].replace(" - ", " ")
+                adapter[s] = adapter[s].replace("- ", " ")
+
+                adapter[s] = re.sub(r'\s+', ' ', adapter[s])
         
         return item
 
