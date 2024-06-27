@@ -1,5 +1,11 @@
 import pandas as pd
 import argparse
+import os
+
+thisfile = os.path.abspath(__file__)
+programs = os.path.dirname(thisfile)
+project1 = os.path.dirname(programs)
+data_path = os.path.join(project1, 'data')
 
 
 def filter(category, gender, incl_mat, excl_mat, price_min, price_max, rating_min, washable : int):
@@ -42,7 +48,7 @@ def filter(category, gender, incl_mat, excl_mat, price_min, price_max, rating_mi
         filtered_items = filtered_items[filtered_items['washing_info'].str.contains('machine wash', case=False)]
         search_name = "_".join([search_name, "machinewashable"])
 
-    filtered_items.to_csv("".join(['filtered_items_', search_name, '.csv']), index=False)
+    filtered_items.to_csv("".join([data_path, '/filtered_items_', search_name, '.csv']), index=False)
     
 
 if __name__ == '__main__':
