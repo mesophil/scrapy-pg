@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Uni-Scraper</title>
+    <meta name="author" content="Nico Schiavone">
+    <meta content="Scraped items displayed as an HTML table">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <main class="row">
+            <div class="col">
+                <h1>Scraping Display</h1>
+
+                <p>Every item on Uniqlo's website (for adults at least) in a convenient format.</p>
+
+                <div id="table-container"></div>
+            </div>
+        </main>
+        <footer class="row">
+            <div class="col">
+                <hr>
+                <p class="text-right"><a href="https://github.com/mesophil/scrapy-pg">Scrapy-PG</a> with CSV display adapted from <a href="https://github.com/derekeder/csv-to-html-table">Derek Eder</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/jquery.csv.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="js/csv_to_html_table.js"></script>
+
+    <script>
+        function format_link(link) {
+            if (link)
+                return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+            else return "";
+        }
+
+        function show_image(link) {
+            if (link)
+                return "<img src='" + link + "' alt='Image displaying an item of clothing' width='300'>"
+            else return "";
+        }
+
+        function format_price(price) {
+            if (price)
+                return "$" + price
+            else return "";
+        }
+
+        function format_desc(desc) {
+            if (desc)
+                return '<div id="desc">' + desc + '<div>'
+            else return "";
+        }
+
+        CsvToHtmlTable.init({
+            csv_path: "data/uniqlo_all_items.csv",
+            element: "table-container",
+            allow_download: true,
+            csv_options: {
+                separator: ",",
+                delimiter: '"'
+            },
+            datatables_options: {
+                paging: false
+            },
+            custom_formatting: [
+                [2, format_desc], // make sure name isn't too long
+                [4, show_image], // 0 indexed, column 4 is images
+                [5, format_price], // add a dollar sign to the price
+                [7, format_desc], // apply desc rules to composition
+                [8, format_desc], // make desc not be huge
+                [9, format_desc], // make sure washing info isn't too long
+                [10, format_link] // link the size chart (.html)
+            ]
+        });
+    </script>
+</body>
+</html>

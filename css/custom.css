@@ -1,0 +1,102 @@
+body { 
+  font: 14px/1.3em Verdana, sans-serif;
+}
+
+h1 {
+  font: 32px/1em Verdana, serif;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+h2 {
+  font: 22px/1em Verdana, serif;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+#logo {
+  margin-top: 20px;
+}
+
+#logo img { width: 170px; }
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Verdana, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.legend {
+  text-align: left;
+  line-height: 18px;
+  color: #555;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+
+/* Apply styles to the table container */
+#table-container {
+    width: 100%;
+    border-collapse: collapse; /* Collapse border spacing */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow-x: auto; /* Hide any content that exceeds the table */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style table headers */
+#table-container thead {
+background-color: #f2f2f2; /* Light gray background */
+}
+
+#table-container thead th {
+padding: 12px 25px; /* Padding inside headers */
+text-align: center; /* Align text to the left */
+border-bottom: 1px solid #ddd; /* Bottom border */
+}
+
+/* Style table body */
+#table-container tbody {
+background-color: #fff; /* White background */
+}
+
+/* Style table rows */
+#table-container tbody tr {
+border-bottom: 1px solid #ddd; /* Bottom border */
+}
+
+/* Style table cells */
+#table-container tbody td {
+padding: 10px 15px; /* Padding inside cells */
+}
+
+/* Alternate row background color */
+#table-container tbody tr:nth-child(even) {
+background-color: #f9f9f9; /* Lighter background for even rows */
+}
+
+/* Hover effect on rows */
+#table-container tbody tr:hover {
+background-color: #e9ecef; /* Light gray background on hover */
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    text-align: left;
+}
+
+#desc {
+    max-height: 12em;
+    overflow: auto;
+}
