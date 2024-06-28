@@ -1,4 +1,6 @@
-# scrapy-pg
+# Ecommerce Scraper
+
+## General Scrapy
 
 1. Start the Python venv:
 
@@ -9,7 +11,7 @@
 
 `scrapy crawl XXXXX`
 
-## uni-scraper
+## uni-scraper (manual)
 
 A web scraper designed to shop at uniqlo.
 
@@ -42,3 +44,14 @@ To efficiently find the item of interest, search the product ID in Google.
 14/06/2024
 889 items scraped
 327 duplicates across men/women
+
+
+## uni-scraper (web)
+
+Drop the result CSV from a scrape into `/data`, or use the one that's already there.
+
+Run the web server:
+
+`python3 -m http.server`
+
+Navigate to `http://localhost:8000/`
