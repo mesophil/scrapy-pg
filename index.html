@@ -46,6 +46,12 @@
             else return "";
         }
 
+        function format_product_link(id) {
+            if (id)
+                return "<a href='https://www.uniqlo.com/ca/en/products/" + id + "' target='_blank'>" + id + "</a>";
+            else return ""; 
+        }
+
         function show_image(link) {
             if (link)
                 return "<img src='" + link + "' alt='Image displaying an item of clothing' width='300'>"
@@ -77,6 +83,7 @@
             },
             custom_formatting: [
                 [2, format_desc], // make sure name isn't too long
+                [3, format_product_link], //change the id into a hyperlink
                 [4, show_image], // 0 indexed, column 4 is images
                 [5, format_price], // add a dollar sign to the price
                 [7, format_desc], // apply desc rules to composition
