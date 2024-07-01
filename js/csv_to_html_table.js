@@ -52,6 +52,18 @@ CsvToHtmlTable = {
 
                 $table.DataTable(datatables_options);
 
+                $table.DataTable().columns().every(function (index) {
+                    if (!([4, 5, 6, 10].includes(index))) {
+                        var column = this;
+                        var header = $(column.header());
+                        var input = $('<input type="text" placeholder="..." class="form-control form-control-sm" style="max-width: 10em"/>')
+                            .appendTo(header)
+                            .on('keyup change', function () {
+                                column.search($(this).val()).draw();
+                            });
+                        }
+                });
+
                 if (allow_download) {
                     $containerElement.append("<p><a class='btn btn-info' href='" + csv_path + "'><i class='glyphicon glyphicon-download'></i> Download as CSV</a></p>");
                 }
