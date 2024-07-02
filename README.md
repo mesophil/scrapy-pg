@@ -11,6 +11,12 @@
 
 `scrapy crawl XXXXX`
 
+## General Scraping
+
+Production use of these scraping tools can be found on [my personal website](https://mesophil.github.io/scrapy-pg).
+
+I generally update the CSVs once every couple of weeks.
+
 ## uni-scraper (manual)
 
 A web scraper designed to shop at uniqlo.
