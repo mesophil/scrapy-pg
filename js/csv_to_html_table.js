@@ -17,6 +17,7 @@ CsvToHtmlTable = {
         });
 
         var $table = $("<table class='table table-striped table-condensed' id='" + el + "-table'></table>");
+
         var $containerElement = $("#" + el);
         $containerElement.empty().append($table);
 
@@ -52,16 +53,31 @@ CsvToHtmlTable = {
 
                 $table.DataTable(datatables_options);
 
+                var $inputRow = $('<tr></tr>');
+
                 $table.DataTable().columns().every(function (index) {
                     if (!([4, 5, 6, 10].includes(index))) {
                         var column = this;
                         var header = $(column.header());
+                        var $inputCell = $('<td></td>');
+
                         var input = $('<input type="text" placeholder="..." class="form-control form-control-sm" style="max-width: 10em"/>')
-                            .appendTo(header)
-                            .on('keyup change', function () {
-                                column.search($(this).val()).draw();
+                            .appendTo($inputCell)
+                            .on('keydown', function (e) {
+                                if(e.type === 'keydown' && e.keyCode === 13){
+                                    e.preventDefault();
+                                    column.search($(this).val()).draw();
+                                }
                             });
-                        }
+
+                        $inputCell.appendTo($inputRow);
+
+                    } else {
+                        var $regularCell = $('<td></td>');
+                        $regularCell.appendTo($inputRow);
+                    }
+
+                    $inputRow.appendTo($table.DataTable().table().header());
                 });
 
                 if (allow_download) {

@@ -6,6 +6,7 @@ h1 {
   font: 32px/1em Verdana, serif;
   text-transform: uppercase;
   color: #000000;
+  padding: 1rem 0rem;
 }
 
 h2 {
@@ -98,6 +99,11 @@ div.dataTables_wrapper div.dataTables_filter {
 }
 
 #desc {
-    max-height: 12em;
+    max-height: 15em;
     overflow: auto;
+}
+
+img {
+  max-width: 80vw;
+  max-height: 80vw;
 }
