@@ -6,7 +6,13 @@
 import scrapy
 
 
-class CScraperItem(scrapy.Item):
+class CosItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    gender = scrapy.Field()
+    category = scrapy.Field()
+    name = scrapy.Field()
+    product_id = scrapy.Field()
+    img = scrapy.Field()
+    price = scrapy.Field()
+
