@@ -6,7 +6,7 @@
 import scrapy
 
 
-class CosItem(scrapy.Item):
+class AberItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     gender = scrapy.Field()
