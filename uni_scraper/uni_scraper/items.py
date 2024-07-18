@@ -11,7 +11,7 @@ class UniItem(scrapy.Item):
     category = scrapy.Field()
     product_id = scrapy.Field()
     gender = scrapy.Field()
-    desc = scrapy.Field()
+    product_info = scrapy.Field()
     img = scrapy.Field()
     composition = scrapy.Field()
     price = scrapy.Field()

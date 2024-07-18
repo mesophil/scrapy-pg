@@ -30,7 +30,7 @@ to scrape all the data from UNIQLO's website. The result is stored in `uniqlo_al
 The data includes:
 1.	Category
 2.	Composition
-3.	Description (cleaned)
+3.	Product Description (cleaned)
 4.	Gender
 5.	Name
 6.	Price (in CAD)

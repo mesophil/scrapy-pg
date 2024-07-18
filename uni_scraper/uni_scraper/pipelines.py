@@ -14,7 +14,7 @@ class CleanDescriptionPipeline:
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)
 
-        for s in ['desc', 'washing_info', 'composition']:
+        for s in ['product_info', 'washing_info', 'composition']:
 
             if adapter.get(s):
                 adapter[s] = adapter[s].replace("<br>", " ")

@@ -29,7 +29,7 @@ class UniSpiderJson(scrapy.Spider):
             product_item['name'] = item['name']
             product_item['product_id'] = item['productId']
             product_item['gender'] = item['genderName']
-            product_item['desc'] = item['longDescription']
+            product_item['product_info'] = item['longDescription']
 
             product_item['img'] = item['images']['main'][0]['url']
 
