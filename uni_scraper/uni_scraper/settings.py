@@ -72,6 +72,7 @@ ITEM_PIPELINES = {
    "uni_scraper.pipelines.DuplicatesPipeline": 100,
    "uni_scraper.pipelines.CleanDescriptionPipeline": 200,
    "uni_scraper.pipelines.RoundNumbersPipeline": 300,
+   "uni_scraper.pipelines.SaveToPostgresPipeline" : 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
