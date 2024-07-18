@@ -8,6 +8,7 @@
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
 import re
+import uni_scraper.config as config
 
 import psycopg2
 
@@ -63,11 +64,11 @@ class SaveToPostgresPipeline:
     def open_spider(self, spider):
         # Open the database connection and cursor when the spider starts
         try:
-            self.connection = psycopg2.connect(host='aws-0-us-east-1.pooler.supabase.com',
-                                               dbname='postgres',
-                                               user='postgres.akuzqmqccgzywodqtglx',
-                                               password='DCtcYwoC^m*aCAJ&#&t6vwE@zYk5s4LF',
-                                               port=6543)
+            self.connection = psycopg2.connect(host=config.host,
+                                               dbname=config.dbname,
+                                               user=config.username,
+                                               password=config.username,
+                                               port=config.port)
             self.curr = self.connection.cursor()
             print("Database connection opened.")
 
@@ -88,7 +89,7 @@ class SaveToPostgresPipeline:
     
     def process_item(self, item, spider):
         try:
-            self.curr.execute(""" insert into products (
+            self.curr.execute(""" insert into uniproducts (
                               gender, category, name, product_id, img, price, rating, composition, product_info, washing_info, size_chart
                               ) values (
                               %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
