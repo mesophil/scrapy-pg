@@ -8,9 +8,13 @@
 from itemadapter import ItemAdapter
 from scrapy.exceptions import DropItem
 import re
-import uni_scraper.config as config
+from uni_scraper.config import username, password, dbname, port, host
+
+import logging
 
 import psycopg2
+
+logging.basicConfig(filename='my.log', encoding='utf-8', level=logging.WARNING)
 
 class CleanDescriptionPipeline:
     def process_item(self, item, spider):
@@ -59,19 +63,19 @@ class DuplicatesPipeline:
 class SaveToPostgresPipeline:
     
     def open_spider(self, spider):
+        logging.warning('Opened spider')
         # Open the database connection and cursor when the spider starts
         try:
-            self.connection = psycopg2.connect(host=config.host,
-                                               dbname=config.dbname,
-                                               user=config.username,
-                                               password=config.username,
-                                               port=config.port)
+            self.connection = psycopg2.connect(host=host,
+                                               dbname=dbname,
+                                               user=username,
+                                               password=password,
+                                               port=port)
             self.curr = self.connection.cursor()
             print("Database connection opened.")
 
         except BaseException as e:
-            print(f"Error opening database connection: {e}")
-
+            logging.warning(f"Error opening database connection: {e}")
         # create staging DB
         try:
             self.create_staging()
@@ -188,7 +192,7 @@ class SaveToPostgresPipeline:
     def delete_obselete_rows(self):
         self.curr.execute("""
                           DELETE FROM UniProducts
-                          WHERE product_id NOT IN (SELECT product_id FROM StagingTable);
+                          WHERE product_id NOT IN (SELECT product_id FROM StagingProducts);
                           """
                           )
 

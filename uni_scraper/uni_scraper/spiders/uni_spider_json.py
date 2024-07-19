@@ -4,7 +4,7 @@ from uni_scraper.generate_urls import read_urls
 import logging
 import json
 
-logging.basicConfig(filename='my.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='my.log', encoding='utf-8', level=logging.WARNING)
 
 class UniSpiderJson(scrapy.Spider):
     name = "uni_spider"
@@ -12,6 +12,7 @@ class UniSpiderJson(scrapy.Spider):
     start_urls = read_urls()
 
     def parse(self, response):
+        logging.getLogger('scrapy').propagate = False
         data = json.loads(response.text)
 
         product_item = UniItem()
