@@ -58,9 +58,6 @@ class DuplicatesPipeline:
         
 class SaveToPostgresPipeline:
     
-    def __init__(self) -> None:
-        pass
-
     def open_spider(self, spider):
         # Open the database connection and cursor when the spider starts
         try:
@@ -75,7 +72,25 @@ class SaveToPostgresPipeline:
         except BaseException as e:
             print(f"Error opening database connection: {e}")
 
+        # create staging DB
+        try:
+            self.create_staging()
+            print("Staging DB created.")
+        
+        except BaseException as e:
+            print(f"Could not create staging database: {e}")
+
+
     def close_spider(self, spider):
+
+        # merge tables
+        try:
+            self.merge_tables()
+            print("Tables merged.")
+        
+        except BaseException as e:
+            print(f"Could not merge staging table into prod: {e}")
+
         # Commit any remaining transactions and close the connection and cursor when the spider finishes
         try:
             if self.connection:
@@ -86,12 +101,32 @@ class SaveToPostgresPipeline:
 
         except BaseException as e:
             print(f"Error closing database connection: {e}")
+
+
+
+    def create_staging(self):
+        self.curr.execute("""CREATE TEMP TABLE StagingProducts (
+                                    gender VARCHAR(16),
+                                    category VARCHAR(32),
+                                    name VARCHAR(128),
+                                    product_id VARCHAR(32) PRIMARY KEY,
+                                    img TEXT,
+                                    price VARCHAR(16),
+                                    rating VARCHAR(16),
+                                    composition TEXT,
+                                    product_info TEXT,
+                                    washing_info TEXT,
+                                    size_chart TEXT
+                                    ); """)
+        return
     
     def process_item(self, item, spider):
+
+        # write all items to staging DB
         try:
-            self.curr.execute(""" insert into uniproducts (
+            self.curr.execute(""" INSERT INTO StagingProducts (
                               gender, category, name, product_id, img, price, rating, composition, product_info, washing_info, size_chart
-                              ) values (
+                              ) VALUES (
                               %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                               )""", (
                                 item["gender"],
@@ -113,3 +148,48 @@ class SaveToPostgresPipeline:
             self.connection.rollback()
 
         return item
+    
+    def merge_tables(self):
+        self.update_prod()
+        self.add_new_rows()
+        self.delete_obselete_rows()
+        return
+
+
+    def update_prod(self):
+        self.curr.execute("""
+                          UPDATE UniProducts t
+                          SET
+                            gender = s.gender,
+                            category = s.category,
+                            name = s.name,
+                            img = s.img,
+                            price = s.price,
+                            rating = s.rating,
+                            composition = s.composition,
+                            product_info = s.product_info,
+                            washing_info = s.washing_info,
+                            size_chart = s.size_chart
+                          FROM StagingProducts s
+                          WHERE t.product_id = s.product_id;
+                            """
+                          )
+        
+    def add_new_rows(self):
+        self.curr.execute("""
+                          INSERT INTO UniProducts (gender, category, name, product_id, img, price, rating, composition, product_info, washing_info, size_chart)
+                          SELECT s.gender, s.category, s.name, s.product_id, s.img, s.price, s.rating, s.composition, s.product_info, s.washing_info, s.size_chart
+                          FROM StagingProducts s
+                          LEFT JOIN UniProducts t ON s.product_id = t.product_id
+                          WHERE t.product_id IS NULL;
+                          """
+                          )
+
+    def delete_obselete_rows(self):
+        self.curr.execute("""
+                          DELETE FROM UniProducts
+                          WHERE product_id NOT IN (SELECT product_id FROM StagingTable);
+                          """
+                          )
+
+    
