@@ -18,7 +18,7 @@
             <div class="col">
                 <h1>Scraper Display</h1>
 
-                <p>Every item on Uniqlo's website (for adults at least) in a convenient format. <a href="https://mesophil.github.io">Click here to go back to the main page.</a> </p>
+                <p>Every item on Uniqlo's website (for adults at least) in a convenient format.</p>
 
                 <div id="table-container"></div>
             </div>
@@ -80,13 +80,12 @@
             },
             datatables_options: {
                 paging: true,
-                scroller: true,
                 dom: "lrtip",
             },
-            custom_formatting: [
+            custom_formatting: [ // this is 0 indexed
                 [2, format_desc], // make sure name isn't too long
                 [3, format_product_link], //change the id into a hyperlink
-                [4, show_image], // 0 indexed, column 4 is images
+                [4, show_image], // embed img
                 [5, format_price], // add a dollar sign to the price
                 [7, format_desc], // apply desc rules to composition
                 [8, format_desc], // make desc not be huge
