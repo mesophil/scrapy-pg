@@ -86,7 +86,6 @@ class SaveToPostgresPipeline:
 
 
     def close_spider(self, spider):
-
         # merge tables
         try:
             self.merge_tables()
