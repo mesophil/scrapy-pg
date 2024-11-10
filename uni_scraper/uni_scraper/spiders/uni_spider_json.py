@@ -45,10 +45,10 @@ class UniSpiderJson(scrapy.Spider):
 
             product_item['rating'] = item['rating']['average'] if item['rating'] else None
 
-            if item['sizeInformation']:
-                product_item['size_chart'] = item['sizeInformation']
-            else:
+            if item['sizeChartUrl']:
                 product_item['size_chart'] = item['sizeChartUrl']
+            else:
+                product_item['size_chart'] = item['sizeInformation']
 
             product_item['washing_info'] = item['washingInformation']
 
