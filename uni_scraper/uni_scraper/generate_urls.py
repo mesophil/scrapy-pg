@@ -3,7 +3,8 @@ import argparse
 def read_urls(file_name='uni_scraper/urls.txt'):
     urls = []
 
-    base_url = 'https://www.uniqlo.com/ca/api/commerce/v3/en/products?path=%2C%2C'
+    # base_url = 'https://www.uniqlo.com/ca/api/commerce/v3/en/products?path=%2C%2C'
+    base_url = 'https://www.uniqlo.com/ca/api/commerce/v3/en/products?path='
     num_items = '&limit=350'
 
     with open(file_name, 'r') as file:
