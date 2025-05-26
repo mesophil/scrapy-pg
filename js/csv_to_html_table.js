@@ -51,6 +51,18 @@ CsvToHtmlTable = {
                 }
                 $table.append($tableBody);
 
+                if (datatables_options.dom) {
+                    // If dom is already specified, ensure it includes pagination at top and bottom
+                    if (datatables_options.dom.indexOf('p') === -1) {
+                        datatables_options.dom = 'p' + datatables_options.dom + 'p';
+                    } else if (datatables_options.dom.indexOf('p') === datatables_options.dom.lastIndexOf('p')) {
+                        // Only one 'p', add another at the beginning
+                        datatables_options.dom = 'p' + datatables_options.dom;
+                    }
+                } else {
+                    datatables_options.dom = 'pfrtip'; // p=pagination, f=filter, r=processing, t=table, i=info
+                }
+
                 $table.DataTable(datatables_options);
 
                 var $inputRow = $('<tr></tr>');
